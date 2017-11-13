@@ -1,0 +1,1 @@
+# CORGISdata_StateFragility
