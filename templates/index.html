@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <link rel="stylesheet" type="text/css" href="mystyle.css">
-  <title>State Fragility Data</title>
- </head>
- <body>
-   <h1>About the State Fragility data</h1>
+{% extends "layout.html" %}
+{% set active_page ="index" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>About the State Fragility data</h1>
    <p id="main">
      This data and research about state fragility was taken from a CORGIS data set.  It applies a score from -10 to +10.
     The scores are for a country's security, politics, economics, and social aspects.  The data is only for countries
@@ -18,5 +17,4 @@
     http://www.systemicpeace.org/inscrdata.html
   </p>
    </p>
- </body>
-</html>
+{% endblock %}
