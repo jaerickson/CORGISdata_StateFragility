@@ -1,0 +1,15 @@
+	{% extends "layout.html" %}
+{% set active_page ="legitimacy" %}
+
+{% block title %}State Legitimacy{% endblock %}
+
+{% block content %}
+  <form action="/">
+      		<select name="countries"> 
+        		{{ countries }}
+			
+	      	</select>
+		<br><br>
+		<input type="submit">
+	 </form>
+{% endblock %}
