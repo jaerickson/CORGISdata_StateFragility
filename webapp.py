@@ -15,6 +15,7 @@ def get_country_options():
             options += Markup("<option value=\"" + c["Country"] + "\">" + c["Country"] + "</option>")
     return options
 @app.route("/")
+def render_main('index.html')
 @app.route("/l")
 def render_home():   
     return render_template('legitimacy.html',countries=get_country_options())
