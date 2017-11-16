@@ -20,5 +20,8 @@ def render_main():
 @app.route("/l")
 def render_legitimacy():   
     return render_template('legitimacy.html',countries=get_country_options())
+@app.route("/e")
+def render_legitimacy():   
+    return render_template('effectiveness.html',countries=get_country_options())
 if __name__ == '__main__':
     app.run(debug=False, port=54321)
