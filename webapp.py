@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def get_country_options():
     with open('state_fragility (1).json') as demographics_data:
-    countries = json.load(demographics_data)
+        countries = json.load(demographics_data)
     options = ""
     s = []
     for c in countries:
