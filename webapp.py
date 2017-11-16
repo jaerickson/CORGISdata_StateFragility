@@ -18,7 +18,7 @@ def get_country_options():
 def render_main():
     return render_template('index.html')
 @app.route("/l")
-def render_home():   
+def render_legitimacy():   
     return render_template('legitimacy.html',countries=get_country_options())
 if __name__ == '__main__':
     app.run(debug=False, port=54321)
