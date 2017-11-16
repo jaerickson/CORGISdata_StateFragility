@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	  <meta charset="utf-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='{% block css %}css{% endblock %}')}}">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	  <script src="{{url_for('static',filename='{% block java %}java{% endblock %}')}}"></script>
-	  
-	  <title>{% block title%}{% endblock %} </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mystyle.css')}}">
+  <title>{% block title %}{% endblock %} - My Webpage</title>
+  
   </head>
   <body>
-	  <nav class="navbar navbar-inverse">
-		  <div class="container-fluid">
-			  <div class="navbar-header">
-				  <a class="navbar-brand" href="index.html">CORGISdate_StateFragility</a>
-			  </div>
-			  <ul class="nav navbar-nav">
-				  <li class="active"><a href="index.html">Home</a></li>
-				  <li class="dropdown">
-					  <a class="dropdown-toggle" data-toggle="dropdown">Temperature
-						  <span class="caret"></span></a>
-					  <ul class="dropdown-menu">
-						  <li><a href="q1.1">Quiz 1.1</a></li>
-						  <li><a href="q1.2">Quiz 1.2</a></li>
-						  <li><a href="q1.3">Quiz 1.3</a></li>
-					  </ul>
-				  </li>
-				  <li>
-				  <li class="dropdown active">
-					  <a class="dropdown-toggle" data-toggle="dropdown">Volume
-						  <span class="caret"></span></a>
-					  <ul class="dropdown-menu">
-						  <li><a href="q2.1">Quiz 2.1</a></li>
-						  <li><a href="q2.2">Quiz 2.2</a></li>
-						  <li><a href="q2.3">Quiz 2.3</a></li>
-					  </ul>
-				  </li>
-				  <li>
-				  <li class="dropdown">
-					  <a class="dropdown-toggle" data-toggle="dropdown">Length
-						  <span class="caret"></span></a>
-					  <ul class="dropdown-menu">
-						  <li><a href="q3.2">Quiz 3.1</a></li>
-						  <li><a href="q3.2">Quiz 3.2</a></li>
-						  <li><a href="q3.3">Quiz 3.3</a></li>
-					  </ul>
-				  </li>
-				  </li>
-			  </ul>
-		  </div>
-	  </nav>
     
-    {% block content %}{% endblock%}
+    <nav class="navbar navbar-(255,0,0)">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href=".">My Website</a>
+        </div>
+          <ul class="nav navbar-nav">
+            <li {% if active_page == "index" %} class = "active" {% endif %}><a href=".">Home</a></li>
+            <li {% if active_page == "legitimacy" %} class = "active" {% endif %}><a href="e">Legitimacy Score</a></li> <!-- p1 will show up in the url -->
+            <li {% if active_page == "effectiveness" %} class = "active" {% endif %}><a href="s">Effectiveness Score</a></li>
+          </ul>
+      </div>
+    </nav>
     
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	</body>
+    
+   {% block content %}{% endblock %}
+    
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  </body>
+</html>
