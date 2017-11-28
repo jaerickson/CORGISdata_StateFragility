@@ -14,24 +14,25 @@ def get_country_options():
             s.append(c["Country"])
             options += Markup("<option value=\"" + c["Country"] + "\">" + c["Country"] + "</option>")
     return options
+
 def get_legitimacy_score(options):
-    with open('state_fragility (1).json') as demographics_data:
-        countries = json.load(demographics_data)
-	legscore= ""
-    for c in counrties:
-        if c["Country"] == options:
-			legscore=c
-            
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in counrties:
+		if c["Country"] == options:
+			if(type=="submit"):
+				legscore = c
+			else:
+				legscore = " "
+	return legscore
+
 @app.route("/")
 def render_main():
     return render_template('index.html')
 @app.route("/l")
 def render_legitimacy():
-	#if(type=="submit"):
-		#security=str("security score")
-	#else:
-		#security=str("not submittted")
-    return render_template('legitimacy.html',countries=get_country_options(),security)
+    #return render_template('legitimacy.html',countries=get_country_options(),legislativescore=get_legitimacy_score(request.args["countries"]))
+	return render_template('legitimacy.html',countries=get_country_options(),legitimacyscore=str("score"))
 @app.route("/e")
 def render_effectiveness():   
     return render_template('effectiveness.html',countries=get_country_options())
