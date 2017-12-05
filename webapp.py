@@ -1,8 +1,12 @@
 from flask import Flask, request, Markup, render_template, flash, Markup
 import os
 import json
+import plotly.plotly as py
+import plotly.graph_objs as go
+import numpy as np
 
 app = Flask(__name__)
+
 
 def get_country_options():
     with open('state_fragility (1).json') as demographics_data:
@@ -14,27 +18,110 @@ def get_country_options():
             s.append(c["Country"])
             options += Markup("<option value=\"" + c["Country"] + "\">" + c["Country"] + "</option>")
     return options
+#def get_yvalues():
+ #   with open('state_fragility (1).json') as demographics_data:
+  #      countries = json.load(demographics_data)
+ #   yvalues = ""
+  #  s = []
+ #   for c in countries:
+  #      if not c["Metrics"]["Legitimacy"]["Legitimacy Score"] in s:
+   #         s.append(c["Metrics"]["Legitimacy"]["Legitimacy Score"])
+    #        yvalues += Markup("<option value=\"" + c["Metrics"]["Legitimacy"]["Legitimacy Score"] + "\">" + c["Metrics"]["Legitimacy"]["Legitimacy Score"] + "</option>")
+    #return str(yvalues)
 
 def get_legitimacy_score(options):
 	with open('state_fragility (1).json') as demographics_data:
 		countries = json.load(demographics_data)
-	for c in counrties:
+	for c in countries:
 		if c["Country"] == options:
-			if(type=="submit"):
-				legscore = c
-			else:
-				legscore = " "
-	return legscore
+			legscore = c["Metrics"]["Legitimacy"]["Legitimacy Score"]
+	return "Legitimacy Score: " + str(legscore)
+	
+def get_plegitimacy_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			plegscore = c["Metrics"]["Legitimacy"]["Political Legitimacy"]
+	return "Political Legitimacy: " + str(plegscore)
+def get_elegitimacy_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			elegscore = c["Metrics"]["Legitimacy"]["Economic Legitimacy"]
+	return "Economic Legitimacy: " + str(elegscore)
+def get_selegitimacy_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			selegscore = c["Metrics"]["Legitimacy"]["Security Legitimacy"]
+	return "Security Legitimacy: " + str(selegscore)
+def get_solegitimacy_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			solegscore = c["Metrics"]["Legitimacy"]["Social Legitimacy"]
+	return "Social Legitimacy: " + str(solegscore)
+	
+def get_peffectiveness_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			peffscore = c["Metrics"]["Effectiveness"]["Political Effectiveness"]
+	return "Political Effectiveness: " + str(peffscore)
+def get_eeffectiveness_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			eeffscore = c["Metrics"]["Effectiveness"]["Economic Effectiveness"]
+	return "Economic Effectiveness: " + str(eeffscore)
+def get_seeffectiveness_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			seeffscore = c["Metrics"]["Effectiveness"]["Security Effectiveness"]
+	return "Security Effectiveness: " + str(seeffscore)
+def get_soeffectiveness_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			soeffscore = c["Metrics"]["Effectiveness"]["Social Effectiveness"]
+	return "Social Effectiveness: " + str(soeffscore)
+def get_effectiveness_score(options):
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	for c in countries:
+		if c["Country"] == options:
+			effscore = c["Metrics"]["Effectiveness"]["Effectiveness Score"]
+	return "Effectiveness Score: " + str(effscore)
+
 
 @app.route("/")
-def render_main():
+def render_home():
     return render_template('index.html')
 @app.route("/l")
 def render_legitimacy():
-    #return render_template('legitimacy.html',countries=get_country_options(),legislativescore=get_legitimacy_score(request.args["countries"]))
-	return render_template('legitimacy.html',countries=get_country_options(),legitimacyscore=str("score"))
+	if "countries" in request.args:
+		return render_template('legitimacy.html',countries=get_country_options(),legitimacyscore=get_legitimacy_score(request.args["countries"]),plegitscore=get_plegitimacy_score(request.args["countries"]),
+		elegitscore=get_elegitimacy_score(request.args["countries"]),selegitscore=get_selegitimacy_score(request.args["countries"]),solegitscore=get_solegitimacy_score(request.args["countries"]))
+	else:
+		return render_template('legitimacy.html',countries=get_country_options())
 @app.route("/e")
-def render_effectiveness():   
-    return render_template('effectiveness.html',countries=get_country_options())
+def render_effectiveness():
+	if "countries" in request.args:
+		return render_template('effectiveness.html',countries=get_country_options(),effectivenessscore=get_effectiveness_score(request.args["countries"]),peffscore=get_peffectiveness_score(request.args["countries"]),
+		eeffscore=get_eeffectiveness_score(request.args["countries"]),seeffscore=get_seeffectiveness_score(request.args["countries"]),soeffscore=get_soeffectiveness_score(request.args["countries"]))
+	else:
+		return render_template('effectiveness.html',countries=get_country_options())
+#@app.route("/d")
+#def render_graph():
+ #   return render_template('dotplot.html',y=get_yvalues(),x=get_country_options())
 if __name__ == '__main__':
     app.run(debug=True, port=54321)
