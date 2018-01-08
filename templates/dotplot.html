@@ -4,17 +4,17 @@
 {% block title %}Graph{% endblock %}
 
 {% block content %}
-<script src="/static/CanvasChart.js" type="text/javascript"></script>
+    <script src="/static/CanvasChart.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
-            var dataDef = { title: "Legitimacy Scores for different countries",
-                            xLabel: 'Country', 
+            var dataDef = { title:"Legitimacy Score for different countries",
+                            xLabel: 'Country',
                             yLabel: 'Legitimacy Score',
                             labelFont: '19pt Arial', 
                             dataPointFont: '10pt Arial',
                             renderTypes: [CanvasChart.renderType.lines, CanvasChart.renderType.points],
-                            dataPoints: [{ x: 'country', y: 12}]
+                            dataPoints:  [{{datapoints}}]
                            };
             CanvasChart.render('canvas', dataDef);
         });

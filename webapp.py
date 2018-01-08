@@ -18,16 +18,16 @@ def get_country_options():
             s.append(c["Country"])
             options += Markup("<option value=\"" + c["Country"] + "\">" + c["Country"] + "</option>")
     return options
-#def get_yvalues():
- #   with open('state_fragility (1).json') as demographics_data:
-  #      countries = json.load(demographics_data)
- #   yvalues = ""
-  #  s = []
- #   for c in countries:
-  #      if not c["Metrics"]["Legitimacy"]["Legitimacy Score"] in s:
-   #         s.append(c["Metrics"]["Legitimacy"]["Legitimacy Score"])
-    #        yvalues += Markup("<option value=\"" + c["Metrics"]["Legitimacy"]["Legitimacy Score"] + "\">" + c["Metrics"]["Legitimacy"]["Legitimacy Score"] + "</option>")
-    #return str(yvalues)
+def get_xyvalues():
+    with open('state_fragility (1).json') as demographics_data:
+        countries = json.load(demographics_data)
+    xyvalues = ""
+    d = []
+    for v in countries:
+        if not v["Country"] in d:
+            d.append(v["Metrics"]["Legitimacy"]["Legitimacy Score"])
+            xyvalues += Markup("{ x:" + str(v["Country"]) +", y:" + str(v["Metrics"]["Legitimacy"]["Legitimacy Score"])  + "}")
+    return xyvalues
 
 def get_legitimacy_score(options):
 	with open('state_fragility (1).json') as demographics_data:
@@ -120,8 +120,8 @@ def render_effectiveness():
 		eeffscore=get_eeffectiveness_score(request.args["countries"]),seeffscore=get_seeffectiveness_score(request.args["countries"]),soeffscore=get_soeffectiveness_score(request.args["countries"]))
 	else:
 		return render_template('effectiveness.html',countries=get_country_options())
-#@app.route("/d")
-#def render_graph():
- #   return render_template('dotplot.html',y=get_yvalues(),x=get_country_options())
+@app.route("/d")
+def render_graph():
+    return render_template('dotplot.html',datapoints=get_xyvalues())
 if __name__ == '__main__':
-    app.run(debug=True, port=54321)
+    app.run(debug=True)
