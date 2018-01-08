@@ -11,8 +11,8 @@
             var dataDef = { title:"Legitimacy Score for different countries",
                             xLabel: 'Country',
                             yLabel: 'Legitimacy Score',
-                            labelFont: '19pt Arial', 
-                            dataPointFont: '10pt Arial',
+                            labelFont: '12pt Arial', 
+                            dataPointFont: '8pt Arial',
                             renderTypes: [CanvasChart.renderType.lines, CanvasChart.renderType.points],
                             dataPoints:  [{{datapoints}}]
                            };
@@ -20,6 +20,6 @@
         });
 
     </script>
-	<canvas id="canvas" width="1000" height="600"></canvas>
+	<canvas id="canvas" width="2000" height="1200"></canvas>
 	
 {% endblock %}

@@ -19,15 +19,18 @@ def get_country_options():
             options += Markup("<option value=\"" + c["Country"] + "\">" + c["Country"] + "</option>")
     return options
 def get_xyvalues():
-    with open('state_fragility (1).json') as demographics_data:
-        countries = json.load(demographics_data)
-    xyvalues = ""
-    d = []
-    for v in countries:
-        if not v["Country"] in d:
-            d.append(v["Metrics"]["Legitimacy"]["Legitimacy Score"])
-            xyvalues += Markup("{ x:" + str(v["Country"]) +", y:" + str(v["Metrics"]["Legitimacy"]["Legitimacy Score"])  + "}")
-    return xyvalues
+	with open('state_fragility (1).json') as demographics_data:
+		countries = json.load(demographics_data)
+	xyvalues = ""
+	d = []
+	s = []
+	for v in countries:
+		if not v["Country"] in s:
+			s.append(v["Country"])
+			d.append(v["Metrics"]["Legitimacy"]["Legitimacy Score"])
+			#print(str(v["Country"]).replace("'","&q'")
+			xyvalues += Markup("{ x:'" + str(v["Country"]).replace("'","&quot") +"', y:" + str(v["Metrics"]["Legitimacy"]["Legitimacy Score"])  + "},")
+	return xyvalues[0:-1]
 
 def get_legitimacy_score(options):
 	with open('state_fragility (1).json') as demographics_data:
