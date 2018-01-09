@@ -28,7 +28,6 @@ def get_xyvalues():
 		if not v["Country"] in s:
 			s.append(v["Country"])
 			d.append(v["Metrics"]["Legitimacy"]["Legitimacy Score"])
-			#print(str(v["Country"]).replace("'","&q'")
 			xyvalues += Markup("{ x:'" + str(v["Country"]).replace("'","&quot") +"', y:" + str(v["Metrics"]["Legitimacy"]["Legitimacy Score"])  + "},")
 	return xyvalues[0:-1]
 
